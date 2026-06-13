@@ -1,0 +1,13 @@
+{
+  "name": "cs-546-lab-2",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Samantha Bryan 20234836",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "devDependencies": {}
+}

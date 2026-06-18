@@ -1,0 +1,17 @@
+{
+  "name": "cs-546-lab-2",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Samantha Bryan 20024836",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongodb": "^6.1.0"
+  },
+  "devDependencies": {}
+}

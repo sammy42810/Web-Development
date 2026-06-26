@@ -1,0 +1,6 @@
+node_modules/
+*.zip
+__MACOSX/
+Samantha_Bryan.zip
+Bryan_Samantha.zip
+.DS_Store

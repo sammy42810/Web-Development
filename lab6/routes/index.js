@@ -1,3 +1,13 @@
-//Here you will import both route files and export the constructor method as shown in lecture code where there is more than one route file. Look at lecture 6 lecture code for example
+import equipmentRoutes from './equipment.js';
+import checkoutsRoutes from './checkouts.js';
 
-// when the route is /courses use the routes defined in courses.js routing file, when the route is /students use the routes defined students.js routing file, all other enpoints should return a 404 as shown in the lecture code.
+const constructorMethod = (app) => {
+  app.use('/equipment', equipmentRoutes);
+  app.use('/checkouts', checkoutsRoutes);
+
+  app.use('*', (req, res) => {
+    res.status(404).json({error: 'Not found'});
+  });
+};
+
+export default constructorMethod;

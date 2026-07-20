@@ -1,0 +1,78 @@
+{{!
+This page will be rendered when the following route is hit: GET http://localhost:3000/meal/:id
+The title of the document should be the name of the meal. You should have the title set as the <title> element of the
+    HTML document.
+
+    Your page should reference a CSS file, /public/css/styles.css; this file should have at least 10 rulesets you must
+    use at least 5 of them on this page.
+
+    You should have a main element, and inside of the main element, you will have an article tag that has an h1 with the
+    meal title, an img which the src is set to the value read from the meal image field in the data which is a URL to an
+    image for the meal. and will have the meal data. Please see the rendered HTML example below. Not all fields from the
+    data are used, refer to the HTML example below for the fields/elements you must show on your page.
+
+    Matching Meal Data Returned from API:
+
+    {
+    "idMeal": "52772",
+    "strMeal": "Teriyaki Chicken Casserole",
+    "strCategory": "Chicken",
+    "strArea": "Japanese",
+    "strInstructions": "Preheat oven to 350° F. Spray a 9x13-inch baking pan with non-stick spray....",
+    "strMealThumb": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
+    "strTags": "Meat,Casserole",
+    "strYoutube": "https://www.youtube.com/watch?v=4aZr5hZXP_s",
+    "strIngredient1": "soy sauce",
+    "strIngredient2": "water",
+    "strIngredient3": "brown sugar",
+    "strIngredient4": "ground ginger",
+    "strIngredient5": "minced garlic",
+    "strMeasure1": "3/4 cup",
+    "strMeasure2": "1/2 cup",
+    "strMeasure3": "1/4 cup",
+    "strMeasure4": "1/2 teaspoon",
+    "strMeasure5": "1/2 teaspoon",
+    "strSource": "http://damndelicious.net/2016/05/27/teriyaki-chicken-casserole/"
+    }
+    HTML Format with the rendered data for the Meal. This will go into your main element:
+
+<main>
+  <article>
+    <h1>{{meal.strMeal}}</h1>
+    {{#if meal.strMealThumb}}
+      <img alt="{{meal.strMeal}}" src="{{meal.strMealThumb}}">
+    {{else}}
+      <img alt="{{meal.strMeal}}" src="/public/images/no_image.jpeg">
+    {{/if}}
+    <h2>Instructions</h2>
+    <p>{{#if meal.strInstructions}}{{meal.strInstructions}}{{else}}N/A{{/if}}</p>
+
+    <section>
+      <h3>Info</h3>
+      <dl>
+        <dt>Category:</dt>
+        <dd>{{#if meal.strCategory}}{{meal.strCategory}}{{else}}N/A{{/if}}</dd>
+        <dt>Area:</dt>
+        <dd>{{#if meal.strArea}}{{meal.strArea}}{{else}}N/A{{/if}}</dd>
+        <dt>Tags:</dt>
+        <dd>{{#if meal.strTags}}{{meal.strTags}}{{else}}N/A{{/if}}</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h4>Ingredients</h4>
+      <ul>
+        {{#each ingredients}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <section>
+      <h4>Links</h4>
+      <p><strong>Recipe Source:</strong> {{#if meal.strSource}}<a target="_blank" href="{{meal.strSource}}">{{meal.strMeal}}</a>{{else}}N/A{{/if}}</p>
+      <p><strong>YouTube Tutorial:</strong> {{#if meal.strYoutube}}<a target="_blank" href="{{meal.strYoutube}}">YouTube Link</a>{{else}}N/A{{/if}}</p>
+    </section>
+  </article>
+  <a href="/">Search for Another Meal</a>
+</main>

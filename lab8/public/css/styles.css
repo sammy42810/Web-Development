@@ -1,0 +1,75 @@
+/* Ruleset 1 - style freely */
+body {
+  font-family: "Times New Roman", Times, serif;
+  background-color: #defafc;
+  color: #720c0c;
+  margin: 0;
+  padding: 0 1rem 2rem;
+}
+
+/* Ruleset 2 - style freely */
+h1 {
+  color: #511c00;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+/* Ruleset 3 - style freely */
+h2 {
+  color: #720c0c;
+  text-align: center;
+}
+
+/* Ruleset 4 - style freely */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ruleset 5 - style freely */
+form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Ruleset 6 - style freely (keep both inputs visible/usable) */
+input[type='text'],
+input[type='submit'] {
+  padding: 0.4rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+/* Ruleset 7 - style freely */
+ol li {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+/* Ruleset 8 - REQUIRED: keep this a bounded thumbnail size (~100px x 100px)
+   so the raw API images don't render huge. Colors/borders/etc are free,
+   just don't remove the width/height constraint. */
+.searchResultImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Ruleset 9 - style freely */
+dl dt {
+  font-weight: bold;
+}
+
+/* Ruleset 10 - style freely */
+.error,
+.meal-not-found {
+  color: #a00000;
+  font-weight: bold;
+}

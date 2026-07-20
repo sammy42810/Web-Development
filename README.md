@@ -92,6 +92,20 @@ Three static, semantically-structured HTML documents (no JavaScript this week), 
 
 Validated against the [W3C Markup Validator](https://validator.w3.org/#validate_by_input).
 
+### Lab 8 — Meal Search (`lab8/`)
+
+An Express + Handlebars server-rendered app for searching [TheMealDB](https://www.themealdb.com/api.php) via Axios.
+
+| Route                          | Description                                                        |
+| ------------------------------- | -------------------------------------------------------------------- |
+| `GET /`                         | Search form                                                          |
+| `POST /searchmealsbykeyword`    | Searches meals by keyword; `400` on blank input, `404` on no matches |
+| `GET /meal/:id`                 | Full meal detail (ingredients, instructions, source/YouTube links); `404` if the id doesn't exist |
+
+- **Views:** `views/home.handlebars`, `views/searchResults.handlebars`, `views/meal.handlebars`, `views/error.handlebars`, `views/layouts/main.handlebars`
+- **Data layer:** `data/meals.js` (Axios calls to `search.php` / `lookup.php`)
+- **Server:** `http://localhost:3000`
+
 ## Final Project (`Final Project/`)
 
 Pitch deck and presentation recording for the CS 546 final project.
@@ -105,7 +119,9 @@ Pitch deck and presentation recording for the CS 546 final project.
 - **Module system:** ES6 (`import`/`export`)
 - **Async pattern:** `async`/`await` throughout
 - **Database:** MongoDB (labs 4–6)
-- **Server:** Express (labs 5–6)
+- **Server:** Express (labs 5–6, 8)
+- **Templating:** Handlebars via `express-handlebars` (lab 8)
+- **HTTP client:** Axios (lab 8)
 - **Testing:** Jest (`*.test.mjs`)
 - **Markup:** Semantic HTML5 (lab 7)
 
@@ -136,6 +152,10 @@ npm start      # runs on http://localhost:3000
 
 # Lab 7 — no server, just open the HTML files directly
 open lab7/index.html
+
+# Lab 8
+cd lab8/
+npm start      # runs on http://localhost:3000
 ```
 
 ## Concepts Demonstrated

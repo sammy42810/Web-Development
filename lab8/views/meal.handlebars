@@ -36,42 +36,43 @@ The title of the document should be the name of the meal. You should have the ti
     }
     HTML Format with the rendered data for the Meal. This will go into your main element:
 
-    <article>
-        <h1>Teriyaki Chicken Casserole</h1>
-        <img alt="Teriyaki Chicken Casserole Image"
-            src="https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg">
-        <h2>Instructions</h2>
-        <p>Preheat oven to 350° F. Spray a 9x13-inch baking pan with non-stick spray....</p>
+<main>
+  <article>
+    <h1>{{meal.strMeal}}</h1>
+    {{#if meal.strMealThumb}}
+      <img alt="{{meal.strMeal}}" src="{{meal.strMealThumb}}">
+    {{else}}
+      <img alt="{{meal.strMeal}}" src="/public/images/no_image.jpeg">
+    {{/if}}
+    <h2>Instructions</h2>
+    <p>{{#if meal.strInstructions}}{{meal.strInstructions}}{{else}}N/A{{/if}}</p>
 
-        <section>
-            <h3>Info</h3>
-            <dl>
-                <dt>Category:</dt>
-                <dd>Chicken</dd>
-                <dt>Area:</dt>
-                <dd>Japanese</dd>
-                <dt>Tags:</dt>
-                <dd>Meat, Casserole</dd>
-            </dl>
-        </section>
+    <section>
+      <h3>Info</h3>
+      <dl>
+        <dt>Category:</dt>
+        <dd>{{#if meal.strCategory}}{{meal.strCategory}}{{else}}N/A{{/if}}</dd>
+        <dt>Area:</dt>
+        <dd>{{#if meal.strArea}}{{meal.strArea}}{{else}}N/A{{/if}}</dd>
+        <dt>Tags:</dt>
+        <dd>{{#if meal.strTags}}{{meal.strTags}}{{else}}N/A{{/if}}</dd>
+      </dl>
+    </section>
 
-        <section>
-            <h4>Ingredients</h4>
-            <ul>
-                <li>3/4 cup soy sauce</li>
-                <li>1/2 cup water</li>
-                <li>1/4 cup brown sugar</li>
-                <li>1/2 teaspoon ground ginger</li>
-                <li>1/2 teaspoon minced garlic</li>
-            </ul>
-        </section>
+    <section>
+      <h4>Ingredients</h4>
+      <ul>
+        {{#each ingredients}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </section>
 
-        <section>
-            <h4>Links</h4>
-            <p><strong>Recipe Source:</strong> http://damndelicious.net/2016/05/27/teriyaki-chicken-casserole/</p>
-            <p><strong>YouTube Tutorial:</strong> https://www.youtube.com/watch?v=4aZr5hZXP_s</p>
-        </section>
-
-    </article>
-
-    }}
+    <section>
+      <h4>Links</h4>
+      <p><strong>Recipe Source:</strong> {{#if meal.strSource}}<a target="_blank" href="{{meal.strSource}}">{{meal.strMeal}}</a>{{else}}N/A{{/if}}</p>
+      <p><strong>YouTube Tutorial:</strong> {{#if meal.strYoutube}}<a target="_blank" href="{{meal.strYoutube}}">YouTube Link</a>{{else}}N/A{{/if}}</p>
+    </section>
+  </article>
+  <a href="/">Search for Another Meal</a>
+</main>

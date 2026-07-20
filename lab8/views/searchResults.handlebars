@@ -13,21 +13,26 @@ should be "Meals Found". You should have the title set as the <title> element of
     points if you make it that huge. A good width is 100px and a good height is 100px. DO NOT FORGET TO ADD THE ALT
     ATTRIBUTE TO the Image. Set it to be "[meal name] Image" as shown below.
 
-    <ol>
-        <li>
-            <a href="/meal/52795">Chicken Handi <br> <img class="searchResultImage" alt="Chicken Handi Image"
-                    src="https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg"></a>
-        </li>
-        <li>
-            <a href="/meal/52846">Chicken & mushroom Hotpot <br> <img class="searchResultImage"
-                    alt="Chicken & mushroom Hotpot Image"
-                    src="https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg"></a>
-        </li>
-        <li>
-            <a href="/meal/52818">Chicken Fajita Mac and Cheese <br> <img class="searchResultImage"
-                    alt="Chicken Fajita Mac and Cheese Image"
-                    src="https://www.themealdb.com/images/media/meals/qrqywr1503066605.jpg"></a>
-        </li>
-    </ol>
-
-}}
+    <h1>Meals Found</h1>
+    <h2>{{keyword}}</h2>
+    <main>
+    {{#if notFound}}
+        <p class="meal-not-found">We're sorry, but no results were found for {{keyword}}.</p>
+    {{else}}
+        <ol>
+        {{#each meals}}
+            <li>
+            <a href="/meal/{{this.idMeal}}">
+                {{this.strMeal}} <br>
+                {{#if this.strMealThumb}}
+                <img class="searchResultImage" alt="{{this.strMeal}}" src="{{this.strMealThumb}}">
+                {{else}}
+                <img class="searchResultImage" alt="{{this.strMeal}}" src="/public/images/no_image.jpeg">
+                {{/if}}
+            </a>
+            </li>
+        {{/each}}
+        </ol>
+    {{/if}}
+    <a href="/">Search for Another Meal</a>
+    </main>

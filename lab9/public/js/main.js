@@ -1,201 +1,130 @@
-/*
-Using JavaScript in your browser only, you will listen for the form's submit event; when the form is submitted, you will:
-
-Get the value of the input password element.
-You will take in the password input and generate statistics based on the password.
-You will calculate the following statistics based on the password:
-Original Password: you will just show the input that the user entered
-Length: total number of characters in the password
-Uppercase Letters: total number of uppercase letters in the password
-Lowercase Letters: total number of lowercase letters in the password
-Digits: total number of numeric digits in the password
-Special Characters: total number of characters that are not letters or digits
-Unique Characters: total number of distinct characters in the password
-Repeated Characters: number of distinct characters that appear more than once
-Contains Sequential Letters: whether the password contains any sequence of 3 consecutive letters in ascending alphabetical order (such as abc, bcd, xyz). Case should be ignored.
-Contains Sequential Numbers: whether the password contains any sequence of 3 consecutive digits in ascending order (such as 123, 456, 789)
-Password Strength: based on the rules in the assignment specification
-
-Password strength rules:
-Length >= 12 -> +2
-Length >= 8 and < 12 -> +1
-Contains uppercase -> +1
-Contains lowercase -> +1
-Contains digits -> +1
-Contains special characters -> +1
-Contains sequential characters -> -1
-
-IMPORTANT:
-The length rules are NOT cumulative. If the password length is >= 12, it receives +2 points only, not +3.
-The sequential penalty is applied only once even if both letter and number sequences exist.
-
-You will generate the following HTML every time the application processes the password and append it to the results div.
-You will be using a data list element (dl), inside the dl, you will have a data title (dt) that has the title of the stat and then a data description (dd) which has the value.
-
-Here is the output based on the input: "P@ssword123"
-<dl>
-
-  <dt>Original Password</dt>
-  <dd>P@ssword123</dd>
-
-  <dt>Length</dt>
-  <dd>11</dd>
-
-  <dt>Uppercase Letters</dt>
-  <dd>1</dd>
-
-  <dt>Lowercase Letters</dt>
-  <dd>6</dd>
-
-  <dt>Digits</dt>
-  <dd>3</dd>
-
-  <dt>Special Characters</dt>
-  <dd>1</dd>
-
-  <dt>Unique Characters</dt>
-  <dd>10</dd>
-
-  <dt>Repeated Characters</dt>
-  <dd>1</dd>
-
-  <dt>Contains Sequential Letters</dt>
-  <dd>false</dd>
-
-  <dt>Contains Sequential Numbers</dt>
-  <dd>true</dd>
-
-  <dt>Password Strength</dt>
-  <dd>Moderate</dd>
-
-</dl>
-
-You will generate the above HTML and append it to the div every time the form is submitted, so you will have multiple data lists (dl) in the div, one for each time the user inputs and processes a password. So for example:
-
-If the user submitted the following input and processed it:
-
-1. "password1"
-
-2. "SuperSecure99!"
-
-3. "hello123"
-
-Your div would look like this:
-
-<div id="results">
-
-  <dl>
-
-    <dt>Original Password</dt>
-    <dd>password1</dd>
-
-    <dt>Length</dt>
-    <dd>9</dd>
-
-    <dt>Uppercase Letters</dt>
-    <dd>0</dd>
-
-    <dt>Lowercase Letters</dt>
-    <dd>8</dd>
-
-    <dt>Digits</dt>
-    <dd>1</dd>
-
-    <dt>Special Characters</dt>
-    <dd>0</dd>
-
-    <dt>Unique Characters</dt>
-    <dd>8</dd>
-
-    <dt>Repeated Characters</dt>
-    <dd>1</dd>
-
-    <dt>Contains Sequential Letters</dt>
-    <dd>false</dd>
-
-    <dt>Contains Sequential Numbers</dt>
-    <dd>false</dd>
-
-    <dt>Password Strength</dt>
-    <dd>Moderate</dd>
-
-  </dl>
-
-  <dl>
-
-    <dt>Original Password</dt>
-    <dd>SuperSecure99!</dd>
-
-    <dt>Length</dt>
-    <dd>14</dd>
-
-    <dt>Uppercase Letters</dt>
-    <dd>2</dd>
-
-    <dt>Lowercase Letters</dt>
-    <dd>9</dd>
-
-    <dt>Digits</dt>
-    <dd>2</dd>
-
-    <dt>Special Characters</dt>
-    <dd>1</dd>
-
-    <dt>Unique Characters</dt>
-    <dd>8</dd>
-
-    <dt>Repeated Characters</dt>
-    <dd>5</dd>
-
-    <dt>Contains Sequential Letters</dt>
-    <dd>false</dd>
-
-    <dt>Contains Sequential Numbers</dt>
-    <dd>false</dd>
-
-    <dt>Password Strength</dt>
-    <dd>Strong</dd>
-
-  </dl>
-
-  <dl>
-
-    <dt>Original Password</dt>
-    <dd>hello123</dd>
-
-    <dt>Length</dt>
-    <dd>8</dd>
-
-    <dt>Uppercase Letters</dt>
-    <dd>0</dd>
-
-    <dt>Lowercase Letters</dt>
-    <dd>5</dd>
-
-    <dt>Digits</dt>
-    <dd>3</dd>
-
-    <dt>Special Characters</dt>
-    <dd>0</dd>
-
-    <dt>Unique Characters</dt>
-    <dd>7</dd>
-
-    <dt>Repeated Characters</dt>
-    <dd>1</dd>
-
-    <dt>Contains Sequential Letters</dt>
-    <dd>false</dd>
-
-    <dt>Contains Sequential Numbers</dt>
-    <dd>true</dd>
-
-    <dt>Password Strength</dt>
-    <dd>Weak</dd>
-
-  </dl>
-
-</div>
-
-If the user does not have a value for the input when they submit, you should not continue processing and instead should inform them of the error on the page. If the user enters bad data, you should not continue processing and instead inform them of the error on the page.
-*/
+(function () {
+  const form = document.getElementById('password_form');
+  const errorMessage = document.getElementById('error_message');
+  const results = document.getElementById('results');
+
+  const hasSequentialLetters = (password) => {
+    const lower = password.toLowerCase();
+    for (let i = 0; i < lower.length - 2; i++) {
+      const a = lower.charCodeAt(i);
+      const b = lower.charCodeAt(i + 1);
+      const c = lower.charCodeAt(i + 2);
+      const isAlpha = (code) => code >= 97 && code <= 122;
+      if (isAlpha(a) && isAlpha(b) && isAlpha(c) && b === a + 1 && c === b + 1) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const hasSequentialNumbers = (password) => {
+    for (let i = 0; i < password.length - 2; i++) {
+      const a = password.charCodeAt(i);
+      const b = password.charCodeAt(i + 1);
+      const c = password.charCodeAt(i + 2);
+      const isDigit = (code) => code >= 48 && code <= 57;
+      if (isDigit(a) && isDigit(b) && isDigit(c) && b === a + 1 && c === b + 1) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const analyzePassword = (password) => {
+    const length = password.length;
+    let uppercase = 0;
+    let lowercase = 0;
+    let digits = 0;
+    let special = 0;
+    const charCounts = {};
+
+    for (const char of password) {
+      if (/[A-Z]/.test(char)) uppercase++;
+      else if (/[a-z]/.test(char)) lowercase++;
+      else if (/[0-9]/.test(char)) digits++;
+      else special++;
+
+      charCounts[char] = (charCounts[char] || 0) + 1;
+    }
+
+    const uniqueChars = Object.keys(charCounts).length;
+    const repeatedChars = Object.values(charCounts).filter((count) => count > 1).length;
+
+    const sequentialLetters = hasSequentialLetters(password);
+    const sequentialNumbers = hasSequentialNumbers(password);
+
+    let score = 0;
+    if (length >= 12) score += 2;
+    else if (length >= 8) score += 1;
+
+    if (uppercase > 0) score += 1;
+    if (lowercase > 0) score += 1;
+    if (digits > 0) score += 1;
+    if (special > 0) score += 1;
+    if (sequentialLetters || sequentialNumbers) score -= 1;
+
+    let strength;
+    if (score <= 2) strength = 'Weak';
+    else if (score <= 4) strength = 'Moderate';
+    else strength = 'Strong';
+
+    return {
+      originalPassword: password,
+      length,
+      uppercase,
+      lowercase,
+      digits,
+      special,
+      uniqueChars,
+      repeatedChars,
+      sequentialLetters,
+      sequentialNumbers,
+      strength
+    };
+  };
+
+  const renderStats = (stats) => {
+    const dl = document.createElement('dl');
+
+    const entries = [
+      ['Original Password', stats.originalPassword],
+      ['Length', stats.length],
+      ['Uppercase Letters', stats.uppercase],
+      ['Lowercase Letters', stats.lowercase],
+      ['Digits', stats.digits],
+      ['Special Characters', stats.special],
+      ['Unique Characters', stats.uniqueChars],
+      ['Repeated Characters', stats.repeatedChars],
+      ['Contains Sequential Letters', stats.sequentialLetters],
+      ['Contains Sequential Numbers', stats.sequentialNumbers],
+      ['Password Strength', stats.strength]
+    ];
+
+    for (const [title, value] of entries) {
+      const dt = document.createElement('dt');
+      dt.textContent = title;
+      const dd = document.createElement('dd');
+      dd.textContent = String(value);
+      dl.appendChild(dt);
+      dl.appendChild(dd);
+    }
+
+    results.appendChild(dl);
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    errorMessage.textContent = '';
+
+    const password = document.getElementById('password_input').value;
+
+    if (!password) {
+      errorMessage.textContent = 'Error: please enter a password before submitting.';
+      return;
+    }
+
+    const stats = analyzePassword(password);
+    renderStats(stats);
+    form.reset();
+  });
+})();

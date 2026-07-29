@@ -1,3 +1,38 @@
-/*
-You will style your page using at least 5 CSS selectors for general CSS styling. You will place the CSS in its own file.
-*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #bcddfe;
+  color: #3a0000;
+}
+
+header h1 {
+  text-align: center;
+  color: #420d00;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+#results dl {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #666;
+}

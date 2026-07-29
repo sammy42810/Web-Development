@@ -9,3 +9,36 @@ An input element with a name and id of password_input
 The input must be of type password
 A button to submit the form
 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Password Strength Analyzer</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+  </head>
+  <body>
+    <header>
+      <h1>Password Strength Analyzer</h1>
+    </header>
+
+    <main>
+      <form id="password_form">
+        <label for="password_input">Enter a password to analyze:</label>
+        <input type="password" name="password_input" id="password_input" autocomplete="new-password">
+        <button type="submit">Analyze Password</button>
+      </form>
+
+      <div id="error_message" role="alert"></div>
+
+      <div id="results"></div>
+    </main>
+
+    <footer>
+      <p>Sam Bryan</p>
+      <p>Student ID: 20024836</p>
+      <p>CS 546_WS &mdash; Lab 9: Client-Side Password Strength Analyzer</p>
+    </footer>
+
+    <script src="/public/js/main.js"></script>
+  </body>
+</html>

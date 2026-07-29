@@ -1,6 +1,6 @@
 # CS 546 — Web Programming I
 
-A series of labs building up from async fundamentals in Node.js through MongoDB-backed REST APIs, plus a static HTML lab and the final project.
+A series of labs building up from async fundamentals in Node.js through MongoDB-backed REST APIs, plus static HTML and client-side JavaScript labs, and the final project.
 
 ## Labs
 
@@ -106,6 +106,21 @@ An Express + Handlebars server-rendered app for searching [TheMealDB](https://ww
 - **Data layer:** `data/meals.js` (Axios calls to `search.php` / `lookup.php`)
 - **Server:** `http://localhost:3000`
 
+### Lab 9 — Password Strength Analyzer (`lab9/`)
+
+A minimal Express server that just serves a single static page; all password analysis runs entirely in client-side JavaScript.
+
+| Route  | Description                                |
+| ------ | -------------------------------------------- |
+| `GET /` | Serves the password strength analyzer page |
+
+- Stats computed per submission: length, uppercase/lowercase/digit/special-character counts, unique characters, repeated characters, and sequential letter/number detection
+- Strength scoring (non-cumulative length bonus, single sequential-character penalty): Weak (0–2), Moderate (3–4), Strong (5–6)
+- Each submission appends a `<dl>` of results to the page; the form resets and blank input is rejected with an on-page error
+- **Client-side JS:** `public/js/main.js`
+- **Styles:** `public/css/main.css`
+- **Server:** `http://localhost:3000`
+
 ## Final Project (`Final Project/`)
 
 Pitch deck and presentation recording for the CS 546 final project.
@@ -123,7 +138,8 @@ Pitch deck and presentation recording for the CS 546 final project.
 - **Templating:** Handlebars via `express-handlebars` (lab 8)
 - **HTTP client:** Axios (lab 8)
 - **Testing:** Jest (`*.test.mjs`)
-- **Markup:** Semantic HTML5 (lab 7)
+- **Markup:** Semantic HTML5 (labs 7, 9)
+- **Client-side JS:** Vanilla DOM scripting, no frameworks (lab 9)
 
 ## Running the Labs
 
@@ -155,6 +171,10 @@ open lab7/index.html
 
 # Lab 8
 cd lab8/
+npm start      # runs on http://localhost:3000
+
+# Lab 9
+cd lab9/
 npm start      # runs on http://localhost:3000
 ```
 

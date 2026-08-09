@@ -1,0 +1,17 @@
+{{! This will be your default layout for all handlebars files rendered. This will be inherited by all other templates. }}
+{{! Refer lecture code to learn more on how this works. }}
+{{! Do not forget to include your css and your client-side script file references in the layout. }}
+{{! For the theme, you can read the member's colorScheme from the session and inject the colors into the body element. }}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/public/css/sitestyles.css" />
+  </head>
+  <body {{#if colorScheme}}style="background-color: {{colorScheme.pageBackground}}; color: {{colorScheme.textColor}};"{{/if}}>
+    {{{body}}}
+    <script src="/public/js/form_validate.js"></script>
+  </body>
+</html>

@@ -1,14 +1,24 @@
-# CS 546 — Web Programming I
+# Web Development I & II
 
-A series of labs building up from async fundamentals in Node.js through MongoDB-backed REST APIs, plus static HTML and client-side JavaScript labs, and the final project.
+Coursework for two web programming courses, organized by course:
 
-## Labs
+```
+.
+├── cs546/   — CS 546 Web Programming I  (labs 1–9)
+└── cs554/   — CS 554 Web Programming II (labs 1–…)
+```
 
-### Lab 1 — Async Fundamentals (`lab1-async-fundamentals/`)
+---
+
+## CS 546 — Web Programming I (`cs546/`)
+
+A series of labs building up from async fundamentals in Node.js through MongoDB-backed REST APIs, plus static HTML and client-side JavaScript labs.
+
+### Lab 1 — Async Fundamentals (`cs546/lab1-async-fundamentals/`)
 
 Introduction to async/await and Promise-based patterns in Node.js. Exercises on chaining async operations, error propagation, and handling edge cases.
 
-### Lab 2 — Utility Functions (`lab2-utility-functions/`)
+### Lab 2 — Utility Functions (`cs546/lab2-utility-functions/`)
 
 Modular utility libraries for common data manipulation:
 
@@ -16,7 +26,7 @@ Modular utility libraries for common data manipulation:
 - **`stringUtils.js`** — string normalization, parsing, and validation helpers
 - **`objectUtils.js`** — object merging, key extraction, and restructuring
 
-### Lab 3 — Data Access Layer (`lab3-data-access/`)
+### Lab 3 — Data Access Layer (`cs546/lab3-data-access/`)
 
 A multi-module async data access system over a simulated dataset of students, courses, and instructors:
 
@@ -27,164 +37,115 @@ A multi-module async data access system over a simulated dataset of students, co
 | `instructors.js` | `getInstructorRoster`, `instructorsByDepartment`, `getInstructorById` |
 | `helpers.js`     | Shared data-fetching utilities                                        |
 
-Each function validates inputs strictly (type checks, null/undefined guards, whitespace-only strings) and throws descriptive errors for invalid inputs, following real-world API design patterns.
+Each function validates inputs strictly (type checks, null/undefined guards, whitespace-only strings) and throws descriptive errors for invalid inputs.
 
-### Lab 4 — MongoDB Data Access (`lab4-mongodb-data-access/`)
+### Lab 4 — MongoDB Data Access (`cs546/lab4-mongodb-data-access/`)
 
 A CRUD data access layer backed by MongoDB. Manages gym equipment records with full create, read, update, and delete operations.
 
-| Function                    | Description                                       |
-| ---------------------------- | -------------------------------------------------- |
-| `createEquipmentItem()`      | Inserts a new equipment item with full validation  |
-| `getAllEquipmentItems()`     | Returns all items in the collection                |
-| `getEquipmentById(id)`       | Fetches a single item by ObjectId                  |
-| `updateEquipmentLocation()`  | Updates an item's storage location                 |
-| `removeEquipmentItem(id)`    | Deletes an item by ObjectId                        |
+- **Database:** `Samantha_Bryan_lab4` · **Collection:** `equipment`
 
-- **Database:** `Samantha_Bryan_lab4`
-- **Collection:** `equipment`
-
-### Lab 5 — Express REST API (`lab5-express-rest-api/`)
+### Lab 5 — Express REST API (`cs546/lab5-express-rest-api/`)
 
 A simple Express server exposing a REST API over a MongoDB bands collection.
 
-| Route            | Description                            |
-| ----------------- | --------------------------------------- |
-| `GET /bands`      | Returns all 20 bands as a JSON array    |
-| `GET /bands/:id`  | Returns a single band by its ObjectId   |
+| Route            | Description                           |
+| ---------------- | ------------------------------------- |
+| `GET /bands`     | Returns all 20 bands as a JSON array  |
+| `GET /bands/:id` | Returns a single band by its ObjectId |
 
-Error handling:
-- `400` — id is a number or an invalid ObjectId
-- `404` — no band found with the given id
+- **Database:** `Samantha_Bryan_lab5` · **Collection:** `bands` · **Server:** `http://localhost:3000`
 
-- **Database:** `Samantha_Bryan_lab5`
-- **Collection:** `bands`
-- **Server:** `http://localhost:3000`
-
-### Lab 6 — Equipment Checkout API (`lab6/`)
+### Lab 6 — Equipment Checkout API (`cs546/lab6-equipment-checkout-api/`)
 
 An expanded Express + MongoDB REST API layering equipment checkout/checkin tracking on top of the equipment CRUD from Lab 4.
 
-| Route                                   | Description                                       |
-| ----------------------------------------- | -------------------------------------------------- |
-| `GET /equipment`                          | Returns all equipment items                        |
-| `POST /equipment`                         | Creates a new equipment item                        |
-| `GET /equipment/:equipmentId`             | Fetches a single item by ObjectId                   |
-| `PATCH /equipment/:equipmentId`           | Partially updates an equipment item                 |
-| `DELETE /equipment/:equipmentId`          | Deletes an equipment item                            |
-| `POST /checkouts/checkout/:equipmentId`   | Checks an item out to a borrower                     |
-| `POST /checkouts/checkin/:checkoutId`     | Checks a borrowed item back in                       |
-| `GET /checkouts/overdue`                  | Lists equipment that is overdue for return           |
+| Route                                   | Description                         |
+| --------------------------------------- | ----------------------------------- |
+| `GET /equipment`                        | Returns all equipment items         |
+| `POST /equipment`                       | Creates a new equipment item        |
+| `GET /equipment/:equipmentId`           | Fetches a single item by ObjectId   |
+| `PATCH /equipment/:equipmentId`         | Partially updates an equipment item |
+| `DELETE /equipment/:equipmentId`        | Deletes an equipment item           |
+| `POST /checkouts/checkout/:equipmentId` | Checks an item out to a borrower    |
+| `POST /checkouts/checkin/:checkoutId`   | Checks a borrowed item back in      |
+| `GET /checkouts/overdue`                | Lists equipment overdue for return  |
 
-- **Database:** `Samantha_Bryan_lab6`
-- **Collection:** `equipment`
-- **Server:** `http://localhost:3000`
+- **Database:** `Samantha_Bryan_lab6` · **Collection:** `equipment` · **Server:** `http://localhost:3000`
 
-### Lab 7 — HTML Fundamentals (`lab7/`)
+### Lab 7 — HTML Fundamentals (`cs546/lab7-html-fundamentals/`)
 
-Three static, semantically-structured HTML documents (no JavaScript this week), sharing a common nav header:
+Three static, semantically-structured HTML documents sharing a common nav header (`index.html`, `education.html`, `story.html`). Validated against the [W3C Markup Validator](https://validator.w3.org/).
 
-| Page              | Description                                                             |
-| ------------------ | ------------------------------------------------------------------------ |
-| `index.html`       | Bio, favorite TV shows (ordered list), and hobbies (unordered list)     |
-| `education.html`   | A `section` per school attended, with favorite class and a memory       |
-| `story.html`       | A short personal story told in paragraphs                                |
-
-Validated against the [W3C Markup Validator](https://validator.w3.org/#validate_by_input).
-
-### Lab 8 — Meal Search (`lab8/`)
+### Lab 8 — Meal Search (`cs546/lab8-meal-search/`)
 
 An Express + Handlebars server-rendered app for searching [TheMealDB](https://www.themealdb.com/api.php) via Axios.
 
-| Route                          | Description                                                        |
-| ------------------------------- | -------------------------------------------------------------------- |
-| `GET /`                         | Search form                                                          |
-| `POST /searchmealsbykeyword`    | Searches meals by keyword; `400` on blank input, `404` on no matches |
-| `GET /meal/:id`                 | Full meal detail (ingredients, instructions, source/YouTube links); `404` if the id doesn't exist |
+| Route                        | Description                                                          |
+| ---------------------------- | -------------------------------------------------------------------- |
+| `GET /`                      | Search form                                                          |
+| `POST /searchmealsbykeyword` | Searches meals by keyword; `400` on blank input, `404` on no matches |
+| `GET /meal/:id`              | Full meal detail; `404` if the id doesn't exist                      |
 
-- **Views:** `views/home.handlebars`, `views/searchResults.handlebars`, `views/meal.handlebars`, `views/error.handlebars`, `views/layouts/main.handlebars`
-- **Data layer:** `data/meals.js` (Axios calls to `search.php` / `lookup.php`)
 - **Server:** `http://localhost:3000`
 
-### Lab 9 — Password Strength Analyzer (`lab9/`)
+### Lab 9 — Password Strength Analyzer (`cs546/lab9/`)
 
-A minimal Express server that just serves a single static page; all password analysis runs entirely in client-side JavaScript.
+A minimal Express server serving a single static page; all password analysis runs client-side. Stats per submission: length, character-class counts, unique/repeated characters, and sequential detection, scored Weak / Moderate / Strong.
 
-| Route  | Description                                |
-| ------ | -------------------------------------------- |
-| `GET /` | Serves the password strength analyzer page |
-
-- Stats computed per submission: length, uppercase/lowercase/digit/special-character counts, unique characters, repeated characters, and sequential letter/number detection
-- Strength scoring (non-cumulative length bonus, single sequential-character penalty): Weak (0–2), Moderate (3–4), Strong (5–6)
-- Each submission appends a `<dl>` of results to the page; the form resets and blank input is rejected with an on-page error
-- **Client-side JS:** `public/js/main.js`
-- **Styles:** `public/css/main.css`
 - **Server:** `http://localhost:3000`
 
-## Final Project (`Final Project/`)
+---
 
-Pitch deck and presentation recording for the CS 546 final project.
+## CS 554 — Web Programming II (`cs554/`)
 
-- `CS 546 Final Project Pitch.pdf`
-- `FinalProjectPresentation546.mp4`
+### Lab 1 — Recipes REST API (`cs554/lab1/`)
+
+An Express + MongoDB JSON REST API for recipes, with session-based authentication (signup / login / logout via `express-session`), bcrypt-hashed passwords, comments and likes as sub-documents, and paginated listing. There is no UI — tested via Postman.
+
+| Verb   | Route                           | Auth       | Description                                |
+| ------ | ------------------------------- | ---------- | ------------------------------------------ |
+| GET    | `/recipes`                      | public     | Paginated recipes, 50 per page (`?page=n`) |
+| GET    | `/recipes/:id`                  | public     | A single recipe by id                      |
+| POST   | `/recipes`                      | logged in  | Create a recipe                            |
+| PATCH  | `/recipes/:id`                  | owner only | Update a recipe you posted                 |
+| POST   | `/recipes/:id/comments`         | logged in  | Add a comment                              |
+| DELETE | `/recipes/:recipeId/:commentId` | owner only | Delete a comment you posted                |
+| POST   | `/recipes/:id/likes`            | logged in  | Toggle a like on/off                       |
+| POST   | `/signup`                       | public     | Create a user (returns user sans password) |
+| POST   | `/login`                        | public     | Log in; sets the session                   |
+| GET    | `/logout`                       | public     | Destroy the session                        |
+
+**Middleware:** (1) auth guard on recipe writes, (2) auth guard on comment create/delete, (3) app-wide request logger (logs verb, path, and body — never passwords), (4) app-wide per-URL request counter.
+
+**Two collections only** — `recipes` and `users`; comments live as sub-documents inside a recipe.
+
+- **Database:** `Bryan-Samantha-CS554-Lab1`
+- **Server:** `http://localhost:3000`
+- **Stack:** Express · MongoDB · express-session · bcryptjs
+
+---
 
 ## Tech Stack
 
 - **Runtime:** Node.js (v18+)
 - **Module system:** ES6 (`import`/`export`)
 - **Async pattern:** `async`/`await` throughout
-- **Database:** MongoDB (labs 4–6)
-- **Server:** Express (labs 5–6, 8)
-- **Templating:** Handlebars via `express-handlebars` (lab 8)
-- **HTTP client:** Axios (lab 8)
-- **Testing:** Jest (`*.test.mjs`)
-- **Markup:** Semantic HTML5 (labs 7, 9)
-- **Client-side JS:** Vanilla DOM scripting, no frameworks (lab 9)
+- **Database:** MongoDB (CS546 labs 4–6; CS554 lab 1)
+- **Server:** Express
+- **Templating:** Handlebars (CS546 lab 8)
+- **HTTP client:** Axios (CS546 lab 8)
+- **Auth:** express-session + bcryptjs (CS554 lab 1)
 
-## Running the Labs
+## Running a Lab
+
+Each lab is self-contained. Install its dependencies once, then start it:
 
 ```bash
-# Lab 1 — run tests
-cd lab1-async-fundamentals/
-node --experimental-vm-modules node_modules/.bin/jest
-
-# Lab 3
-cd lab3-data-access/
-node app.js
-
-# Lab 4
-cd lab4-mongodb-data-access/
-npm start
-
-# Lab 5
-cd lab5-express-rest-api/
-npm run seed   # seed the database first
-npm start      # runs on http://localhost:3000
-
-# Lab 6
-cd lab6/
-npm run seed   # seed the database first
-npm start      # runs on http://localhost:3000
-
-# Lab 7 — no server, just open the HTML files directly
-open lab7/index.html
-
-# Lab 8
-cd lab8/
-npm start      # runs on http://localhost:3000
-
-# Lab 9
-cd lab9/
-npm start      # runs on http://localhost:3000
+cd cs554/lab1      # or any lab folder, e.g. cs546/lab6-equipment-checkout-api
+npm install        # regenerates node_modules from package.json
+npm start          # servers run on http://localhost:3000
 ```
 
-## Concepts Demonstrated
-
-- ES6 module system (`import`/`export`, `.mjs` files)
-- Async/await and Promise-based data fetching
-- Defensive input validation with descriptive error messages
-- Separation of concerns across multiple data modules
-- MongoDB CRUD operations with the Node.js driver
-- Express routing and JSON REST APIs
-- Unit testing with Jest
-- Semantic, valid HTML document structure
+Labs that talk to MongoDB expect a local server at `mongodb://localhost:27017/`.
+Static HTML labs (CS546 lab 7) need no server — open the `.html` files directly.

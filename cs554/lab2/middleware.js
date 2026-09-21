@@ -5,7 +5,8 @@ import {
   storeResource,
   storeMovieOnMiss,
   recordMovieView,
-  buildWrapper
+  buildWrapper,
+  incrementStat
 } from './data/cache.js';
 import {invalidId} from './errors.js';
 
@@ -18,8 +19,12 @@ export const cacheMiddleware = (type) =>
     if (!isValidImdbId(id)) throw invalidId();
 
     const data = await readResource(type, id);
-    if (data === null) return next(); // cache miss -> route handler
+    if (data === null) {
+      await incrementStat(type, 'misses');
+      return next(); // cache miss -> route handler
+    }
 
+    await incrementStat(type, 'hits');
     if (type === 'movie') {
       await recordMovieView(id);
     }

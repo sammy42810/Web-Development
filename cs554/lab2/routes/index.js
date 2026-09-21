@@ -1,12 +1,14 @@
 import moviesRoutes from './movies.js';
 import seriesRoutes from './series.js';
 import episodesRoutes from './episodes.js';
+import cacheRoutes from './cache.js';
 import {HttpError} from '../errors.js';
 
 const configRoutes = (app) => {
   app.use('/api/movies', moviesRoutes);
   app.use('/api/series', seriesRoutes);
   app.use('/api/episodes', episodesRoutes);
+  app.use('/api/cache', cacheRoutes);
 
   app.use((req, res) => {
     res.status(404).json({error: 'Route not found'});

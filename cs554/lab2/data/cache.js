@@ -82,3 +82,44 @@ export const readHistoryList = async () => {
     throw cacheUnavailable();
   }
 };
+
+// extra credit
+const STATS_TYPES = ['movie', 'series', 'episode'];
+// stats:movie:hits, stats:series:misses, etc.
+export const statsKey = (type, kind) => `stats:${type}:${kind}`;
+// Atomically increments a hit/miss counter (INCR creates the key at 0 first).
+export const incrementStat = async (type, kind) => {
+  const client = getRedis();
+  try {
+    await client.incr(statsKey(type, kind));
+  } catch {
+    throw cacheUnavailable();
+  }
+};
+
+export const readStats = async () => {
+  const client = getRedis();
+  const keys = STATS_TYPES.flatMap((type) => [
+    statsKey(type, 'hits'),
+    statsKey(type, 'misses')
+  ]);
+
+  let values;
+  try {
+    values = await client.mGet(keys);
+  } catch {
+    throw cacheUnavailable();
+  }
+
+  const toNumber = (raw) => {
+    if (raw === null || raw === undefined) return 0;
+    const parsed = Number(raw);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  return {
+    movies: {hits: toNumber(values[0]), misses: toNumber(values[1])},
+    series: {hits: toNumber(values[2]), misses: toNumber(values[3])},
+    episodes: {hits: toNumber(values[4]), misses: toNumber(values[5])}
+  };
+};

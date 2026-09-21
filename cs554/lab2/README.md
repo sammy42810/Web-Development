@@ -21,7 +21,7 @@ history never expire.
 2. Configuration is read from the included `.env` file:
 
    ```text
-   OMDB_API_KEY=cs554
+   OMDB_API_KEY=cs546
    REDIS_URL=redis://localhost:6379
    ```
 

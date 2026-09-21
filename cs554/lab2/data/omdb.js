@@ -52,7 +52,14 @@ export const fetchTitle = async (id) => {
     if (message.includes('api key') || message.includes('limit')) {
       throw omdbUnavailable();
     }
-    if (message.includes('not found') || message === 'incorrect imdb id.') {
+    // A valid-format IMDb id that OMDb has no title for. OMDb returns
+    // "Incorrect IMDb ID." for some ids and "Error getting data." for others;
+    // both mean the requested title is unavailable, so both map to 404.
+    if (
+      message.includes('not found') ||
+      message === 'incorrect imdb id.' ||
+      message === 'error getting data.'
+    ) {
       throw notFound();
     }
     throw upstreamError();
